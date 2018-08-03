@@ -16,9 +16,7 @@ if (global.CanvasGradient === undefined) {
   global.CanvasGradient = function() {};
 }
 
-
-
-const getImageStream = (sensorName, timeSeries) => {
+const getImageBuffer = (sensorName, timeSeries) => {
   const chartJsOptions = {
     type: 'line',
     data: {
@@ -69,18 +67,10 @@ const getImageStream = (sensorName, timeSeries) => {
       }
     }
   }
-  //console.log(JSON.stringify(chartJsOptions, null, 2));
-  //return chartNode.writeImageToFile('image/png', './testimage.png');
-  console.log('Drawing chart');
   return chartNode.drawChart(chartJsOptions)
-    .then(() => {
-      console.log('Chart ready. Returning stream');
-      return chartNode.getImageBuffer('image/png');
-
-//      return chartNode.getImageStream('image/png')
-    })
+    .then(() => chartNode.getImageBuffer('image/png'))
 }
 
 module.exports = {
-  getImageStream
+  getImageBuffer
 };
